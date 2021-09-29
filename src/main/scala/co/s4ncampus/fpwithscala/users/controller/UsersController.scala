@@ -31,10 +31,23 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case Left(UserAlreadyExistsError(existing)) => Conflict(s"The user with legal id ${existing.legalId} already exists")
                 }
         }
+    
+    private def findUser(userService: UserService[F]): HttpRoutes[F] = 
+        HttpRoutes.of[F] {
+            case GET -> Root/LongVar(id) =>
+                val action = for {
+                    result <- userService.find(id.toString()).value
+                } yield result.asJson
+               Ok(action)
+                /*action.flatMap {
+                    case Right(saved) => Ok(saved.asJson)
+                    //case Left(UserAlreadyExistsError(existing)) => Conflict(s"The user with legal id ${existing.legalId} already exists")
+                }*/
+        }
 
     def endpoints(userService: UserService[F]): HttpRoutes[F] = {
         //To convine routes use the function `<+>`
-        createUser(userService)
+        createUser(userService)<+>findUser(userService)
     }
 
 }
