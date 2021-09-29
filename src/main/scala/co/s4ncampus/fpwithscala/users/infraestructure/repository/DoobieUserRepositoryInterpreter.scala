@@ -21,6 +21,8 @@ private object UserSQL {
     WHERE LEGAL_ID = $legalId
   """.query[User]
 
+  def deleteByLegalID() = ???
+
 }
 
 class DoobieUserRepositoryInterpreter[F[_]: Bracket[?[_], Throwable]](val xa: Transactor[F])
