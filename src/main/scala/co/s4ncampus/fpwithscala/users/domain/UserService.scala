@@ -11,10 +11,9 @@ class UserService[F[_]](repository: UserRepositoryAlgebra[F], validation: UserVa
     } yield saved
 
   def find(legalId: String)(implicit M: Monad[F]):OptionT[F, User] =
-    for {
-      _ <- validation.doesNotExistById(legalId)
-      saved <- repository.findByLegalId(legalId)
-    } yield saved
+    for {      
+      founded <- repository.findByLegalId(legalId)
+    } yield founded
 }
 
 object UserService{
