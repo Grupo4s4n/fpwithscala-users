@@ -37,12 +37,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
             case GET -> Root/LongVar(id) =>
                 val action = for {
                     result <- userService.find(id.toString()).value
-                } yield result.asJson
-               Ok(action)
-                /*action.flatMap {
-                    case Right(saved) => Ok(saved.asJson)
-                    //case Left(UserAlreadyExistsError(existing)) => Conflict(s"The user with legal id ${existing.legalId} already exists")
-                }*/
+                } yield result 
+                
+                action.flatMap {
+                    case Some(saved) => Ok(saved.asJson)
+                    case None => NotFound(s"The user with legal id $id doesn't exists")
+                }
         }
 
     def endpoints(userService: UserService[F]): HttpRoutes[F] = {
