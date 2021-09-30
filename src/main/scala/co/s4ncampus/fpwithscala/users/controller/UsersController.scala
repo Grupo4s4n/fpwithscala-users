@@ -17,7 +17,12 @@ import co.s4ncampus.fpwithscala.users.domain.User
 class UsersController[F[_]: Sync] extends Http4sDsl[F] {
 
     implicit val userDecoder: EntityDecoder[F, User] = jsonOf
-
+    /**
+      * Create a new user
+      *
+      * @param userService
+      * @return
+      */
     private def createUser(userService: UserService[F]): HttpRoutes[F] = 
         HttpRoutes.of[F] {
             case req @ POST -> Root =>
@@ -31,7 +36,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case Left(UserAlreadyExistsError(existing)) => Conflict(s"The user with legal id ${existing.legalId} already exists")
                 }
         }
-    
+    /**
+      * Find an user
+      *
+      * @param userService
+      * @return
+      */
     private def findUser(userService: UserService[F]): HttpRoutes[F] = 
         HttpRoutes.of[F] {
             case GET -> Root/LongVar(id) =>
@@ -44,7 +54,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case None => NotFound(s"The user with legal id $id doesn't exists")
                 }  
         }
-
+    /**
+      * Delete an user
+      *
+      * @param userService
+      * @return
+      */
     private def deleteUser(userService: UserService[F]): HttpRoutes[F] =
         HttpRoutes.of[F] {
             case DELETE -> Root/"delete"/LongVar(id) =>
