@@ -11,6 +11,9 @@ Scala-powered.
 - Román Patiño, José Alejandro - joseroman@seven4n.com
 - Tunjo Serna, Guillermo Andres - guillermotunjo@seven4n.com
 
+## APP Architecture
+![Architecture](https://raw.githubusercontent.com/Grupo4s4n/fpwithscala-users/main/FP_Architecture.png)
+
 ## Data model
 ![DataModel](https://github.com/Grupo4s4n/fpwithscala-users/blob/main/MBD.jpeg)
 ## Features
