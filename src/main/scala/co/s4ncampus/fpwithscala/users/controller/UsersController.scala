@@ -42,7 +42,7 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                 action.flatMap {
                     case Some(saved) => Ok(saved.asJson)
                     case None => NotFound(s"The user with legal id $id doesn't exists")
-                }
+                }  
         }
 
     def endpoints(userService: UserService[F]): HttpRoutes[F] = {
