@@ -18,6 +18,11 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
 
     implicit val userDecoder: EntityDecoder[F, User] = jsonOf
 
+    /**
+      * 
+      *
+      * @param userService
+      */
     private def createUser(userService: UserService[F]): HttpRoutes[F] = 
         HttpRoutes.of[F] {
             case req @ POST -> Root =>
@@ -31,7 +36,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case Left(UserAlreadyExistsError(existing)) => Conflict(s"The user with legal id ${existing.legalId} already exists")
                 }
         }
-    
+   /**
+     * 
+     *
+     * @param userService
+     * @return
+     */ 
     private def findUser(userService: UserService[F]): HttpRoutes[F] = 
         HttpRoutes.of[F] {
             case GET -> Root/LongVar(id) =>
@@ -44,7 +54,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case None => NotFound(s"The user with legal id $id doesn't exists")
                 }  
         }
-
+    /**
+      * 
+      *
+      * @param userService
+      * @return
+      */
     private def deleteUser(userService: UserService[F]): HttpRoutes[F] =
         HttpRoutes.of[F] {
             case DELETE -> Root/"delete"/LongVar(id) =>
@@ -57,7 +72,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case None => NotFound()
                 }
         }
-
+    /**
+      * 
+      *
+      * @param userService
+      * @return
+      */
     private def updateUser(userService: UserService[F]): HttpRoutes[F] =
         HttpRoutes.of[F] {
             case req @ PUT -> Root/"update"/LongVar(id) =>
@@ -71,7 +91,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case None => NotFound()
                 }
         }
-
+    /**
+      * 
+      *
+      * @param userService
+      * @return
+      */
     def endpoints(userService: UserService[F]): HttpRoutes[F] = {
         //To convine routes use the function `<+>`
         createUser(userService)<+>findUser(userService)<+>deleteUser(userService)<+>updateUser(userService)
