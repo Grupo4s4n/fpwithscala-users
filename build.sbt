@@ -1,3 +1,9 @@
+name := "fp_with_scala_users"
+
+organization := "seven4n"
+
+version := "0.1.0"
+
 val CatsVersion = "2.2.0"
 val Http4sVersion = "0.21.16"
 val CirceVersion = "0.13.0"
@@ -40,5 +46,8 @@ lazy val root = (project in file("."))
     ),
     addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.10.3"),
     addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.3.1"),
-    testFrameworks += new TestFramework("munit.Framework")
+    testFrameworks += new TestFramework("munit.Framework")    
   )
+  enablePlugins(DockerPlugin)
+
+  dockerAutoPackageJavaApplication()
