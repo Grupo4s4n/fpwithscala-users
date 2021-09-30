@@ -39,15 +39,28 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     result <- userService.find(id.toString()).value
                 } yield result 
                 
-                action.flatMap {
+                action.flatMap{
                     case Some(saved) => Ok(saved.asJson)
                     case None => NotFound(s"The user with legal id $id doesn't exists")
                 }  
         }
 
+    private def deleteUser(userService: UserService[F]): HttpRoutes[F] =
+        HttpRoutes.of[F] {
+            case DELETE -> Root/"delete"/LongVar(id) =>
+                val action = for {
+                    result <- userService.delete(id.toString()).value
+                } yield result
+
+                action.flatMap{
+                    case Some(deleted) => if(deleted==1) Ok("The user was deleted") else NotFound(s"The user with legal id $id doesn't exists")
+                    //case None => NotFound()
+                }
+        }
+
     def endpoints(userService: UserService[F]): HttpRoutes[F] = {
         //To convine routes use the function `<+>`
-        createUser(userService)<+>findUser(userService)
+        createUser(userService)<+>findUser(userService)<+>deleteUser(userService)
     }
 
 }
