@@ -19,6 +19,11 @@ class UserService[F[_]](repository: UserRepositoryAlgebra[F], validation: UserVa
     for {
       deleted <- OptionT.liftF(repository.deleteById(legalId))
     } yield deleted
+
+  def update(legalId: String,user: User)(implicit M: Monad[F]): OptionT[F, Int] = 
+    for {
+      updated <- OptionT.liftF(repository.updateById(legalId, user))
+    } yield updated
 }
 
 object UserService{
