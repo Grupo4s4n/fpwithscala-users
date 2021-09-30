@@ -11,6 +11,8 @@ Scala-powered.
 - Román Patiño, José Alejandro - joseroman@seven4n.com
 - Tunjo Serna, Guillermo Andres - guillermotunjo@seven4n.com
 
+## Data model
+![DataModel](https://raw.githubusercontent.com/Grupo4s4n/fpwithscala-users/main/BDS4N.jpeg)
 ## Features
 #### Create
 
@@ -66,12 +68,12 @@ It is a method in charge of delete user information into DB-host.
 http://localhost:8000/users/delete/${legalId}
 ```
 ## Technologies and libraries
-- [Scala 2.13](https://www.scala-lang.org/) - object-oriented and functional programming in one concise, high-level language.
-- [Cats 2.2.0](https://github.com/typelevel/cats) - 
-- [HTTP4S 0.21.16](https://http4s.org/)
-- [Circe 0.13.6](https://circe.github.io/circe/)
-- [Doobie 0.9.2](https://tpolecat.github.io/doobie/)
-- [Munit 0.7.2](https://scalameta.org/munit/)
-- [LogBack 1.2.3](http://logback.qos.ch/)
-- [MunitCatsEffect 0.13.0](https://github.com/typelevel/munit-cats-effect)
-- [Flyway 7.2.0](https://flywaydb.org/)
+- [Scala 2.13](https://www.scala-lang.org/) - Object-oriented and functional programming in one concise, high-level language.
+- [Cats 2.2.0](https://github.com/typelevel/cats) - Library which provides abstractions for functional programming in the Scala programming language.
+- [HTTP4S 0.21.16](https://http4s.org/) - Typeful, functional, streaming HTTP for Scala.
+- [Circe 0.13.6](https://circe.github.io/circe/) - A JSON library for Scala powered by Cats.
+- [Doobie 0.9.2](https://tpolecat.github.io/doobie/) - A pure functional JDBC layer for Scala and Cats.
+- [Munit 0.7.2](https://scalameta.org/munit/) - Scala testing library with actionable errors and extensible APIs.
+- [LogBack 1.2.3](http://logback.qos.ch/) - Reliable, Fast & Flexible logging framework.
+- [MunitCatsEffect 0.13.0](https://github.com/typelevel/munit-cats-effect) - Provides the ability to write tests that return IO and SyncIO values without needing to call any unsafe methods
+- [Flyway 7.2.0](https://flywaydb.org/) - Version control for  database.
