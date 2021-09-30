@@ -12,7 +12,7 @@ Scala-powered.
 - Tunjo Serna, Guillermo Andres - guillermotunjo@seven4n.com
 
 ## Data model
-![DataModel](https://raw.githubusercontent.com/Grupo4s4n/fpwithscala-users/main/BDS4N.jpeg)
+![DataModel](https://github.com/Grupo4s4n/fpwithscala-users/blob/main/MBD.jpeg)
 ## Features
 #### Create
 
