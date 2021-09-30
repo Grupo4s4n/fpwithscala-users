@@ -8,7 +8,7 @@ class UserValidationInterpreter[F[_]: Applicative](repository: UserRepositoryAlg
     extends UserValidationAlgebra[F] {
   def doesNotExist(user: User): EitherT[F, UserAlreadyExistsError, Unit] = 
     repository.findByLegalId(user.legalId).map(UserAlreadyExistsError).toLeft(())
-  
+
   def doesNotExistById(legalId: String): OptionT[F,User] = 
     repository.findByLegalId(legalId)
 }
