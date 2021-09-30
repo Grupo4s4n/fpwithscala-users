@@ -1,7 +1,7 @@
 # FPWITHSCALA-USERS_TEAM4
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+(https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-FPwithScala-Users it is an application with REST architecture based on an user system which
+FPwithScala-Users is an application with REST architecture based on an user system which
 allows to perform CRUD operations.
 Scala-powered.
 
