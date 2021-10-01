@@ -80,3 +80,23 @@ http://localhost:8000/users/delete/${legalId}
 - [LogBack 1.2.3](http://logback.qos.ch/) - Reliable, Fast & Flexible logging framework.
 - [MunitCatsEffect 0.13.0](https://github.com/typelevel/munit-cats-effect) - Provides the ability to write tests that return IO and SyncIO values without needing to call any unsafe methods
 - [Flyway 7.2.0](https://flywaydb.org/) - Version control for  database.
+
+## Docker
+To run the app in a docker container we use the [sbt-docker plugin](https://github.com/marcuslonnberg/sbt-docker)
+
+The steps for the creation of the image and the container are as follows:
+1. In the root directory project run:
+
+```bash
+sbt docker
+``` 
+2. Found the docker image created by run:
+
+```bash
+docker images
+```
+3. Once you find the docker image ID start the container by:
+
+```bash
+docker run -d -p 8002:8000 ${IMAGE ID}
+```

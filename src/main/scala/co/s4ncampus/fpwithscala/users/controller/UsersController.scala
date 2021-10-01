@@ -19,9 +19,10 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
     implicit val userDecoder: EntityDecoder[F, User] = jsonOf
 
     /**
-      * 
+      * Create a new user
       *
       * @param userService
+      * @return
       */
     private def createUser(userService: UserService[F]): HttpRoutes[F] = 
         HttpRoutes.of[F] {
@@ -36,12 +37,14 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                     case Left(UserAlreadyExistsError(existing)) => Conflict(s"The user with legal id ${existing.legalId} already exists")
                 }
         }
-   /**
-     * 
-     *
-     * @param userService
-     * @return
-     */ 
+
+    /**
+      * Find an user
+      *
+      * @param userService
+      * @return
+      */
+
     private def findUser(userService: UserService[F]): HttpRoutes[F] = 
         HttpRoutes.of[F] {
             case GET -> Root/LongVar(id) =>
@@ -51,11 +54,11 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                 
                 action.flatMap{
                     case Some(saved) => Ok(saved.asJson)
-                    case None => NotFound(s"The user with legal id $id doesn't exists")
+                    case None => NotFound(s"The user with legal id $id doesn't exist")
                 }  
         }
     /**
-      * 
+      * Delete an user
       *
       * @param userService
       * @return
@@ -68,12 +71,14 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                 } yield result
 
                 action.flatMap{
-                    case Some(deleted) => if(deleted==1) Ok("The user was deleted") else NotFound(s"The user with legal id $id doesn't exists")
+                    case Some(deleted) => if(deleted==1) Ok("The user was deleted") else NotFound(s"The user with legal id $id doesn't exist")
                     case None => NotFound()
                 }
         }
+
+
     /**
-      * 
+      * Update an user
       *
       * @param userService
       * @return
@@ -87,12 +92,12 @@ class UsersController[F[_]: Sync] extends Http4sDsl[F] {
                 } yield result
 
                 action.flatMap{
-                    case Some(updated) => if(updated==1) Ok("The user was edited") else NotFound(s"The user with legal id $id doesn't exists")
+                    case Some(updated) => if(updated==1) Ok("The user was edited") else NotFound(s"The user with legal id $id doesn't exist")
                     case None => NotFound()
                 }
-        }
+        }    
     /**
-      * 
+      * Endpoints: In charge of redirection of services
       *
       * @param userService
       * @return
