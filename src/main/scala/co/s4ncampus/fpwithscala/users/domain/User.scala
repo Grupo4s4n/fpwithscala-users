@@ -1,7 +1,7 @@
 package co.s4ncampus.fpwithscala.users.domain
 
 /**
-  * User Class to serialized with the User table 
+  * User Class to serialize with the User table 
   *
   * @param id
   * @param legalId
